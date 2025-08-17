@@ -3,7 +3,7 @@ async function carregarSpawnRules() {
 
     if(isNaN(num)) return
 
-    const reponse = await fetch("../src/js/pokemon.json")
+    const reponse = await fetch("./src/js/pokemon.json")
     const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}`)
 
     const name = (await pokemon.json()).name
@@ -33,4 +33,5 @@ async function carregarSpawnRules() {
     }
     document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`)
     document.getElementById("info").innerHTML = `${name.replace(/\w/, letter => letter.toUpperCase())} does not spawn naturally`
+
 }

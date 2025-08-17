@@ -1,16 +1,14 @@
 async function carregarSpawnRules() {
-    const num = document.getElementById("pokeimput").value
-
-    if (isNaN(num)) return
+    const imput = document.getElementById("pokeimput").value
 
     const reponse = await fetch("./src/js/pokemon.json")
-    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}`)
+    const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${imput.toLowerCase()}`)
 
-    const name = (await pokemon.json()).name
+    const pokedata = await pokemon.json()
 
     const data = (await reponse.json())["minecraft:spawn_rules"].conditions
 
-    const index = data.findIndex(f => f["minecraft:permute_type"].map(e => e.entity_type).includes(`pokemon:p${num}`))
+    const index = data.findIndex(f => f["minecraft:permute_type"].map(e => e.entity_type).includes(`pokemon:p${pokedata.id}`))
 
     if (index !== -1) {
 
@@ -29,10 +27,10 @@ async function carregarSpawnRules() {
 
         console.log(biome)
 
-        document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`)
-        document.getElementById("info").innerHTML = `Pokemon: ${name.replace(/\w/, letter => letter.toUpperCase())}<br>ID: ${num}<br>Spawn type: ${type}<br>Block Spawn: ${block ? block.map(m => m.split(":")[1].replace(/\w/, letter => letter.toUpperCase())).join(", ") : "Any"}<br>Biome Spawn: ${biome ? biome.replace(/\w/, letter => letter.toUpperCase()) : "Any"}<br>Spawn Chance: ${chance}%`
+        document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedata.id}.png`)
+        document.getElementById("info").innerHTML = `Pokemon: ${pokedata.name.replace(/\w/, letter => letter.toUpperCase())}<br>ID: ${pokedata.id}<br>Spawn type: ${type}<br>Block Spawn: ${block ? block.map(m => m.split(":")[1].replace(/\w/, letter => letter.toUpperCase())).join(", ") : "Any"}<br>Biome Spawn: ${biome ? biome.replace(/\w/, letter => letter.toUpperCase()) : "Any"}<br>Spawn Chance: ${chance}%`
         return
     }
-    document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`)
-    document.getElementById("info").innerHTML = `${name.replace(/\w/, letter => letter.toUpperCase())} does not spawn naturally`
+    document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedata.id}.png`)
+    document.getElementById("info").innerHTML = `${pokedata.name.replace(/\w/, letter => letter.toUpperCase())} does not spawn naturally`
 }

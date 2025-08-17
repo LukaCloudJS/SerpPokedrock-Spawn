@@ -1,3 +1,10 @@
+function keyEnter(e) {
+    if (e.key === "Enter") {
+        e.preventDefault()
+        carregarSpawnRules()
+    }
+}
+
 async function carregarSpawnRules() {
     const imput = document.getElementById("pokeimput").value
 

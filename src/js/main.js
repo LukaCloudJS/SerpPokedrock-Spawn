@@ -1,7 +1,7 @@
 async function carregarSpawnRules() {
     const num = document.getElementById("pokeimput").value
 
-    if(isNaN(num)) return
+    if (isNaN(num)) return
 
     const reponse = await fetch("./src/js/pokemon.json")
     const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${num}`)
@@ -27,11 +27,12 @@ async function carregarSpawnRules() {
             type = "Underwater"
         }
 
+        console.log(biome)
+
         document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`)
-        document.getElementById("info").innerHTML = `Pokemon: ${name.replace(/\w/, letter => letter.toUpperCase())}<br>ID: ${num}<br>Spawn type: ${type}<br>Block Spawn: ${block ? block.map(m => m.split(":")[1].replace(/\w/, letter => letter.toUpperCase())).join(", ") : "Any"}<br>Biome Spawn: ${biome.replace(/\w/, letter => letter.toUpperCase())}<br>Spawn Chance: ${chance}%`
+        document.getElementById("info").innerHTML = `Pokemon: ${name.replace(/\w/, letter => letter.toUpperCase())}<br>ID: ${num}<br>Spawn type: ${type}<br>Block Spawn: ${block ? block.map(m => m.split(":")[1].replace(/\w/, letter => letter.toUpperCase())).join(", ") : "Any"}<br>Biome Spawn: ${biome ? biome.replace(/\w/, letter => letter.toUpperCase()) : "Any"}<br>Spawn Chance: ${chance}%`
         return
     }
     document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${num}.png`)
     document.getElementById("info").innerHTML = `${name.replace(/\w/, letter => letter.toUpperCase())} does not spawn naturally`
-
 }

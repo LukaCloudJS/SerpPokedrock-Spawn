@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Spawn</title>
+    <link rel="shortcut icon" href="./src/other/luka.png" type="image/png">
+    <link rel="stylesheet" href="./src/css/font.css">
+    <link rel="stylesheet" href="./src/css/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <img src="./src/other/luka.png" alt="luka.png">
+        <p>Pokemon Spawn</p>
+        <img src="./src/other/pokeball.png" alt="pokeball.png">
+    </div>
+    <div class="pokemoninfo">
+        <div class="imput">
+            <textarea name="pokeimput" id="pokeimput" placeholder="Pokemon ID"></textarea>
+            <button onclick="carregarSpawnRules()">search</button>
+        </div>
+        <img id="pokeimg" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png"
+            alt="pokemon.png">
+        <div class="info">
+            <p id="info">Pokemon: Bulbasaur<br>ID: 1<br>Block Spawn: Grass<br>Biome Spawn: Forest<br>Spawn Chance: 10%</p>
+        </div>
+    </div>
+
+</body>
+<script src="./src/js/main.js"></script>
+
+</html>

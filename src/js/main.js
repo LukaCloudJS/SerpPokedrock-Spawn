@@ -19,7 +19,7 @@ async function carregarSpawnRules() {
 
     if (index !== -1) {
 
-        const biome = data[index]["minecraft:biome_filter"].value
+        let biome = data[index]["minecraft:biome_filter"].value
         const chance = data[index]["minecraft:delay_filter"].spawn_chance
 
         const block = data[index]["minecraft:spawns_on_block_filter"]
@@ -32,7 +32,9 @@ async function carregarSpawnRules() {
             type = "Underwater"
         }
 
-        console.log(biome)
+        if(!isNaN(biome)) {
+            biome = "Any"
+        }
 
         document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedata.id}.png`)
         document.getElementById("info").innerHTML = `Pokemon: ${pokedata.name.replace(/\w/, letter => letter.toUpperCase())}<br>ID: ${pokedata.id}<br>Spawn type: ${type}<br>Block Spawn: ${block ? block.map(m => m.split(":")[1].replace(/\w/, letter => letter.toUpperCase())).join(", ") : "Any"}<br>Biome Spawn: ${biome ? biome.replace(/\w/, letter => letter.toUpperCase()) : "Any"}<br>Spawn Chance: ${chance}%`
@@ -41,3 +43,4 @@ async function carregarSpawnRules() {
     document.getElementById("pokeimg").setAttribute("src", `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokedata.id}.png`)
     document.getElementById("info").innerHTML = `${pokedata.name.replace(/\w/, letter => letter.toUpperCase())} does not spawn naturally`
 }
+
